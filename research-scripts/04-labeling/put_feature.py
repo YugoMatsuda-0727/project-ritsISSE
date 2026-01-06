@@ -1,94 +1,113 @@
+# put_feature.py
+
 import json
 from pathlib import Path
 
-# ===== パス =====
+# ===== パス設定 =====
 BASE_DIR = Path(__file__).resolve().parents[1]
 DATASET_DIR = BASE_DIR / "outputs" / "dataset_pairs"
-META_DIR = BASE_DIR / "outputs" / "metadata"
-OUT_DIR = BASE_DIR / "outputs" / "dataset_W14"
-OUT_DIR.mkdir(parents=True, exist_ok=True)
+METADATA_DIR = BASE_DIR / "outputs" / "metadata"
+OUTPUT_DIR = BASE_DIR / "outputs" / "datasets_with_features"
 
-# ===== util =====
-def load_json(path):
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
+
+# ===== metadata index 作成 =====
+def build_metadata_index(metadata):
+    return {item["file_path"]: item for item in metadata}
+
+
+# ===== 類似度 =====
 def jaccard(a, b):
-    sa, sb = set(a), set(b)
-    if not sa and not sb:
+    if not a or not b:
         return 0.0
-    return len(sa & sb) / len(sa | sb)
+    a, b = set(a), set(b)
+    return len(a & b) / len(a | b)
 
-def normalize(path):
-    return path.replace("\\", "/")
 
-def build_metadata_index(meta, repo_dir):
-    index = {}
-    for c in meta:
-        p = Path(c["file_path"])
-        try:
-            rel = p.relative_to(repo_dir)
-        except ValueError:
+# ===== test 除外 =====
+def is_valid_pair(pair):
+    return (
+        "src/test" not in pair["file1"]
+        and "src/test" not in pair["file2"]
+    )
+
+
+# ===== feature 付与 =====
+def enrich_pairs(dataset, meta_index):
+    enriched = []
+    skipped = 0
+
+    for pair in dataset:
+        # ---- v1: test 除外
+        if not is_valid_pair(pair):
+            skipped += 1
             continue
-        index[normalize(str(rel))] = c
-    return index
+
+        f1 = pair["file1"]
+        f2 = pair["file2"]
+
+        if f1 not in meta_index or f2 not in meta_index:
+            skipped += 1
+            continue
+
+        m1 = meta_index[f1]
+        m2 = meta_index[f2]
+
+        enriched.append({
+            **pair,
+
+            "package_similarity": jaccard(
+                m1.get("package_tokens", []),
+                m2.get("package_tokens", [])
+            ),
+
+            "class_name_similarity": jaccard(
+                m1.get("class_name_tokens", []),
+                m2.get("class_name_tokens", [])
+            ),
+
+            "import_similarity": jaccard(
+                m1.get("import_packages", []),
+                m2.get("import_packages", [])
+            ),
+
+            "method_similarity": jaccard(
+                [m["name"] for m in m1.get("methods", [])],
+                [m["name"] for m in m2.get("methods", [])]
+            ),
+        })
+
+    return enriched, skipped
+
 
 # ===== main =====
 if __name__ == "__main__":
 
-    for dataset_path in DATASET_DIR.glob("*_pairs_mini_dataset.json"):
+    for dataset_file in DATASET_DIR.glob("*_dataset.json"):
+        project = dataset_file.stem.replace("_pairs_mini_dataset", "")
+        print(f"[PROCESS] {project}")
 
-        repo = dataset_path.stem.replace("_pairs_mini_dataset", "")
-        print(f"[PROCESS] {repo}")
-
-        meta_path = META_DIR / f"{repo}.json"
-        if not meta_path.exists():
+        metadata_file = METADATA_DIR / f"{project}.json"
+        if not metadata_file.exists():
             print("  [SKIP] metadata not found")
             continue
 
-        dataset = load_json(dataset_path)
-        metadata = load_json(meta_path)
-        repo_dir = BASE_DIR / repo
-        meta_index = build_metadata_index(metadata, repo_dir)
+        with open(dataset_file, encoding="utf-8") as f:
+            dataset = json.load(f)
 
-        enriched = []
-        skipped = 0
+        with open(metadata_file, encoding="utf-8") as f:
+            metadata = json.load(f)
 
-        for pair in dataset:
-            f1 = pair["file1"]
-            f2 = pair["file2"]
+        meta_index = build_metadata_index(metadata)
 
-            if f1 not in meta_index or f2 not in meta_index:
-                skipped += 1
-                continue
+        enriched, skipped = enrich_pairs(dataset, meta_index)
 
-            c1 = meta_index[f1]
-            c2 = meta_index[f2]
+        out_file = OUTPUT_DIR / f"{project}_dataset_with_features.json"
+        with open(out_file, "w", encoding="utf-8") as f:
+            json.dump(enriched, f, indent=2)
 
-            row = {
-                "repo": repo,
-                "file1": f1,
-                "file2": f2,
-                "label": pair["label"],
-
-                # ===== 特徴量 =====
-                "package_similarity": jaccard(
-                    c1["package_tokens"],
-                    c2["package_tokens"]
-                ),
-                "class_name_similarity": jaccard(
-                    c1["class_name_tokens"],
-                    c2["class_name_tokens"]
-                )
-            }
-
-            enriched.append(row)
-
-        out_path = OUT_DIR / dataset_path.name
-        with open(out_path, "w", encoding="utf-8") as f:
-            json.dump(enriched, f, indent=2, ensure_ascii=False)
-
-        print(f"  total = {len(dataset)}")
+        print(f"  total    = {len(dataset)}")
         print(f"  enriched = {len(enriched)}")
-        print(f"  skipped = {skipped}")
+        print(f"  skipped  = {skipped}")
         print("-" * 40)
