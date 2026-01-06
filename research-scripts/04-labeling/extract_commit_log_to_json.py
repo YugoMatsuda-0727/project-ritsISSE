@@ -38,18 +38,6 @@ def get_git_log(repo_dir: Path):
 
 
 def parse_git_log(lines):
-    """
-    git log の出力を
-    [
-      {
-        commit: "...",
-        changes: [
-          {type: "M", file: "src/..."}, ...
-        ]
-      }
-    ]
-    に変換
-    """
 
     commits = []
     current = None
