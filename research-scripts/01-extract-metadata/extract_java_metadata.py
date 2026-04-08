@@ -55,7 +55,6 @@ def parse_java_file(file_path: Path, project_root: Path):
         content
     )
 
-    # ★★ ここが最重要修正点 ★★
     rel_path = file_path.relative_to(project_root)
     rel_path = str(rel_path).replace("\\", "/")
 
