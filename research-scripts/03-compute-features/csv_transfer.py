@@ -14,10 +14,8 @@ CSV_DIR.mkdir(parents=True, exist_ok=True)
 FEATURE_KEYS = [
     "file_a",
     "file_b",
-    "same_package",
-    "package_prefix_ratio",
-    "class_name_jaccard",
-    "same_role",
+    "package_similarity",
+    "class_name_similarity",
 ]
 
 # ===== JSON読み込み =====
@@ -55,10 +53,10 @@ def save_csv(rows, out_path):
 # ===== main =====
 if __name__ == "__main__":
  
-    json_files = list(PAIR_DIR.glob("*_pairs.json"))  # "_mini"を削除
+    json_files = list(PAIR_DIR.glob("*_pairs_mini.json"))  # "_mini"を削除
  
     if not json_files:
-        print(f"[WARN] {PAIR_DIR} に *_pairs.json が見つかりません")
+        print(f"[WARN] {PAIR_DIR} に *_pairs_mini.json が見つかりません")
     
     for json_file in json_files:
         print(f"[LOAD] {json_file.name}")
