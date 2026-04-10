@@ -85,7 +85,7 @@ if __name__ == "__main__":
 
     for commit_file in COMMIT_DIR.glob("*_commits.json"):
         project_name = commit_file.stem.replace("_commits", "")
-        csv_file = CSV_DIR / f"{project_name}_pairs.csv"
+        csv_file = CSV_DIR / f"{project_name}_pairs_mini.csv"
 
         if not csv_file.exists():
             print(f"[SKIP] CSVが見つかりません: {csv_file.name}")
