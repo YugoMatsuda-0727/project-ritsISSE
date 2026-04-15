@@ -9,11 +9,6 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def get_git_log(repo_dir: Path):
-    """
-    git log から
-    commit hash / 変更種別(A,M,D) / ファイルパス
-    を取得する（v1: 同一コミット内共変更用）
-    """
 
     cmd = [
         "git", "log",
