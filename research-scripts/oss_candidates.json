@@ -1,0 +1,666 @@
+{
+  "all": [
+    {
+      "full_name": "swagger-api/swagger-parser",
+      "url": "https://github.com/swagger-api/swagger-parser",
+      "stars": 859,
+      "size_kb": 9309,
+      "java_files_estimated": 117,
+      "commit_count_estimated": 2908,
+      "description": "Swagger Spec to Java POJOs",
+      "pushed_at": "2026-04-14T07:22:13Z"
+    },
+    {
+      "full_name": "undera/jmeter-plugins",
+      "url": "https://github.com/undera/jmeter-plugins",
+      "stars": 581,
+      "size_kb": 23688,
+      "java_files_estimated": 464,
+      "commit_count_estimated": 3635,
+      "description": "A Marketplace for JMeter Plugins",
+      "pushed_at": "2026-04-14T07:21:24Z"
+    },
+    {
+      "full_name": "apache/stormcrawler",
+      "url": "https://github.com/apache/stormcrawler",
+      "stars": 975,
+      "size_kb": 8586,
+      "java_files_estimated": 254,
+      "commit_count_estimated": 2511,
+      "description": "A scalable, mature and versatile web crawler based on Apache Storm",
+      "pushed_at": "2026-04-14T07:08:34Z"
+    },
+    {
+      "full_name": "86dbs/dbsyncer",
+      "url": "https://github.com/86dbs/dbsyncer",
+      "stars": 882,
+      "size_kb": 11583,
+      "java_files_estimated": 648,
+      "commit_count_estimated": 3156,
+      "description": "DBSyncer（简称dbs）是一款开源的数据同步中间件，提供MySQL、Oracle、SqlServer、PostgreSQL、Elasticsearch(ES)、Kafka、File、SQL等同步场景。支持上传插件自定义同步转换业务，提供监控全量和增量数据统计图、应用性能预警等。",
+      "pushed_at": "2026-04-14T07:04:11Z"
+    },
+    {
+      "full_name": "eclipse-openvsx/openvsx",
+      "url": "https://github.com/eclipse-openvsx/openvsx",
+      "stars": 1901,
+      "size_kb": 22661,
+      "java_files_estimated": 542,
+      "commit_count_estimated": 1812,
+      "description": "An open-source registry for VS Code extensions",
+      "pushed_at": "2026-04-14T07:04:03Z"
+    },
+    {
+      "full_name": "iflytek/skillhub",
+      "url": "https://github.com/iflytek/skillhub",
+      "stars": 2482,
+      "size_kb": 11224,
+      "java_files_estimated": 600,
+      "commit_count_estimated": 685,
+      "description": "Self-hosted, open-source agent skill registry for enterprises. Publish & version skill packages, govern with RBAC and audit logs, deploy   on-premise with Docker or Kubernetes.",
+      "pushed_at": "2026-04-14T07:30:04Z"
+    },
+    {
+      "full_name": "microsoft/mssql-jdbc",
+      "url": "https://github.com/microsoft/mssql-jdbc",
+      "stars": 1127,
+      "size_kb": 21083,
+      "java_files_estimated": 450,
+      "commit_count_estimated": 2884,
+      "description": "The Microsoft JDBC Driver for SQL Server is a Type 4 JDBC driver that provides database connectivity with SQL Server through the standard JDBC application program interfaces (APIs).",
+      "pushed_at": "2026-04-14T06:38:33Z"
+    },
+    {
+      "full_name": "yangzongzhuan/RuoYi-Vue",
+      "url": "https://github.com/yangzongzhuan/RuoYi-Vue",
+      "stars": 2978,
+      "size_kb": 5727,
+      "java_files_estimated": 255,
+      "commit_count_estimated": 1562,
+      "description": ":tada: (RuoYi)官方仓库 基于SpringBoot，Spring Security，JWT，Vue & Element 的前后端分离权限管理系统，同时提供了 Vue3 的版本",
+      "pushed_at": "2026-04-14T06:37:20Z"
+    },
+    {
+      "full_name": "agentscope-ai/agentscope-java",
+      "url": "https://github.com/agentscope-ai/agentscope-java",
+      "stars": 2576,
+      "size_kb": 29321,
+      "java_files_estimated": 836,
+      "commit_count_estimated": 626,
+      "description": "AgentScope Java: Agent-Oriented Programming for Building LLM Applications",
+      "pushed_at": "2026-04-14T06:26:37Z"
+    },
+    {
+      "full_name": "reactor/reactor-netty",
+      "url": "https://github.com/reactor/reactor-netty",
+      "stars": 2757,
+      "size_kb": 29451,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 6847,
+      "description": "TCP/HTTP/UDP/QUIC client/server with Reactor over Netty",
+      "pushed_at": "2026-04-14T07:35:15Z"
+    },
+    {
+      "full_name": "zwc456baby/ScrcpyForAndroid",
+      "url": "https://github.com/zwc456baby/ScrcpyForAndroid",
+      "stars": 685,
+      "size_kb": 15084,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 51,
+      "description": "scrcpy for android",
+      "pushed_at": "2026-04-14T06:18:51Z"
+    },
+    {
+      "full_name": "oinone/oinone-pamirs",
+      "url": "https://github.com/oinone/oinone-pamirs",
+      "stars": 2155,
+      "size_kb": 13343,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 1295,
+      "description": "Oinone is an AI‑Powered low‑code framework that unifies AI and developers around a shared metadata model to build maintainable, evolvable, high‑quality enterprise intelligent applications.[AI Coding][Vibe Coding][Framework][Low Code]",
+      "pushed_at": "2026-04-14T06:18:37Z"
+    },
+    {
+      "full_name": "operator-framework/java-operator-sdk",
+      "url": "https://github.com/operator-framework/java-operator-sdk",
+      "stars": 925,
+      "size_kb": 11884,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 3241,
+      "description": "Java SDK for building Kubernetes Operators",
+      "pushed_at": "2026-04-14T06:08:27Z"
+    },
+    {
+      "full_name": "irockel/tda",
+      "url": "https://github.com/irockel/tda",
+      "stars": 541,
+      "size_kb": 23662,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 698,
+      "description": "TDA - Thread Dump Analyzer (for Java). Analyze your Thread Dumps with a GUI or use it as MCP Server.",
+      "pushed_at": "2026-04-14T05:55:44Z"
+    },
+    {
+      "full_name": "Canner/wren-engine",
+      "url": "https://github.com/Canner/wren-engine",
+      "stars": 644,
+      "size_kb": 26050,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 1320,
+      "description": "The open context engine for AI agents support 15+ data sources. Built on Rust and Apache DataFusion.",
+      "pushed_at": "2026-04-14T05:16:20Z"
+    },
+    {
+      "full_name": "pivovarit/parallel-collectors",
+      "url": "https://github.com/pivovarit/parallel-collectors",
+      "stars": 674,
+      "size_kb": 6465,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 1169,
+      "description": "Parallel Collectors is a toolkit easing parallel collection processing in Java using Stream API.",
+      "pushed_at": "2026-04-14T04:17:31Z"
+    },
+    {
+      "full_name": "yegor256/cactoos",
+      "url": "https://github.com/yegor256/cactoos",
+      "stars": 771,
+      "size_kb": 7094,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 3170,
+      "description": "Object-Oriented Java primitives, as an alternative to Google Guava and Apache Commons",
+      "pushed_at": "2026-04-14T04:12:30Z"
+    },
+    {
+      "full_name": "megaease/easeagent",
+      "url": "https://github.com/megaease/easeagent",
+      "stars": 586,
+      "size_kb": 20815,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 848,
+      "description": "An agent component for the Java system",
+      "pushed_at": "2026-04-14T03:58:36Z"
+    },
+    {
+      "full_name": "nageoffer/ragent",
+      "url": "https://github.com/nageoffer/ragent",
+      "stars": 1491,
+      "size_kb": 9981,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 582,
+      "description": "企业级 Agentic RAG 智能体 - 全链路覆盖文档解析、多路检索、意图识别、问题重写、会话记忆、MCP 工具调用与深度思考。面向真实业务场景，从 0 到 1 完整工程实现。",
+      "pushed_at": "2026-04-14T03:37:54Z"
+    },
+    {
+      "full_name": "lealone/Lealone",
+      "url": "https://github.com/lealone/Lealone",
+      "stars": 2551,
+      "size_kb": 28800,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 3435,
+      "description": "一个能安全适用于个人助理和企业应用的全栈自进化通用智能体",
+      "pushed_at": "2026-04-14T03:12:28Z"
+    },
+    {
+      "full_name": "Winds-Studio/Leaf",
+      "url": "https://github.com/Winds-Studio/Leaf",
+      "stars": 950,
+      "size_kb": 24395,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 1872,
+      "description": "A Paper fork, focused on finding balance between performance, vanilla behavior and stability",
+      "pushed_at": "2026-04-14T02:12:06Z"
+    },
+    {
+      "full_name": "GrimAnticheat/Grim",
+      "url": "https://github.com/GrimAnticheat/Grim",
+      "stars": 1574,
+      "size_kb": 12608,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 4678,
+      "description": "Fully async, multithreaded, predictive, open source, 3.01 reach, 1.005 timer, 0.01% speed, 99.99% antikb, \"bypassable\" 1.8-1.21 minecraft anticheat.",
+      "pushed_at": "2026-04-14T01:52:03Z"
+    },
+    {
+      "full_name": "terrakube-io/terrakube",
+      "url": "https://github.com/terrakube-io/terrakube",
+      "stars": 877,
+      "size_kb": 10773,
+      "java_files_estimated": 506,
+      "commit_count_estimated": 2072,
+      "description": "Open source IaC Automation and Collaboration Software.",
+      "pushed_at": "2026-04-14T01:47:13Z"
+    },
+    {
+      "full_name": "agents-flex/agents-flex",
+      "url": "https://github.com/agents-flex/agents-flex",
+      "stars": 1124,
+      "size_kb": 9984,
+      "java_files_estimated": 330,
+      "commit_count_estimated": 1257,
+      "description": "Agents-flex is A Lightweight Java AI Application Development Framework.",
+      "pushed_at": "2026-04-14T01:46:05Z"
+    },
+    {
+      "full_name": "sqlancer/sqlancer",
+      "url": "https://github.com/sqlancer/sqlancer",
+      "stars": 1721,
+      "size_kb": 6308,
+      "java_files_estimated": 744,
+      "commit_count_estimated": 2611,
+      "description": "Automated testing to find logic and performance bugs in database systems",
+      "pushed_at": "2026-04-14T01:22:50Z"
+    },
+    {
+      "full_name": "spring-projects/spring-kafka",
+      "url": "https://github.com/spring-projects/spring-kafka",
+      "stars": 2459,
+      "size_kb": 16605,
+      "java_files_estimated": 572,
+      "commit_count_estimated": 3027,
+      "description": "Provides Familiar Spring Abstractions for Apache Kafka",
+      "pushed_at": "2026-04-14T01:17:30Z"
+    },
+    {
+      "full_name": "wustor/GangedRecyclerview",
+      "url": "https://github.com/wustor/GangedRecyclerview",
+      "stars": 662,
+      "size_kb": 8728,
+      "java_files_estimated": 23,
+      "commit_count_estimated": 24,
+      "description": "Recyclerview实现双列表联动，列表悬停",
+      "pushed_at": "2026-04-13T23:58:57Z"
+    },
+    {
+      "full_name": "jenkinsci/gitlab-plugin",
+      "url": "https://github.com/jenkinsci/gitlab-plugin",
+      "stars": 1441,
+      "size_kb": 6965,
+      "java_files_estimated": 276,
+      "commit_count_estimated": 2090,
+      "description": "A Jenkins plugin for interfacing with GitLab",
+      "pushed_at": "2026-04-13T23:30:13Z"
+    },
+    {
+      "full_name": "google/adk-java",
+      "url": "https://github.com/google/adk-java",
+      "stars": 1466,
+      "size_kb": 15121,
+      "java_files_estimated": 474,
+      "commit_count_estimated": 989,
+      "description": "An open-source, code-first Java toolkit for building, evaluating, and deploying sophisticated AI agents with flexibility and control.",
+      "pushed_at": "2026-04-13T23:10:57Z"
+    },
+    {
+      "full_name": "pinterest/teletraan",
+      "url": "https://github.com/pinterest/teletraan",
+      "stars": 1829,
+      "size_kb": 20554,
+      "java_files_estimated": 342,
+      "commit_count_estimated": 1868,
+      "description": "Teletraan is Pinterest's deploy system.",
+      "pushed_at": "2026-04-13T22:30:08Z"
+    },
+    {
+      "full_name": "Pi4J/pi4j",
+      "url": "https://github.com/Pi4J/pi4j",
+      "stars": 355,
+      "size_kb": 19661,
+      "java_files_estimated": 516,
+      "commit_count_estimated": 1384,
+      "description": "Pi4J, the Java library to control the GPIOs of the Raspberry Pi",
+      "pushed_at": "2026-04-14T07:34:57Z"
+    },
+    {
+      "full_name": "milvus-io/milvus-sdk-java",
+      "url": "https://github.com/milvus-io/milvus-sdk-java",
+      "stars": 484,
+      "size_kb": 14386,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 826,
+      "description": "Java SDK for Milvus.",
+      "pushed_at": "2026-04-14T07:03:35Z"
+    },
+    {
+      "full_name": "dddjava/jig",
+      "url": "https://github.com/dddjava/jig",
+      "stars": 302,
+      "size_kb": 14435,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 7796,
+      "description": "Javaでのコードによる設計を可視化によって支援するツール",
+      "pushed_at": "2026-04-14T07:06:49Z"
+    },
+    {
+      "full_name": "epam/ai-dial-core",
+      "url": "https://github.com/epam/ai-dial-core",
+      "stars": 656,
+      "size_kb": 4018,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 840,
+      "description": "The main component of AI DIAL, which provides unified API to different chat completion and embedding models, assistants, and applications",
+      "pushed_at": "2026-04-14T06:07:43Z"
+    },
+    {
+      "full_name": "microsoft/vscode-java-test",
+      "url": "https://github.com/microsoft/vscode-java-test",
+      "stars": 331,
+      "size_kb": 11467,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 890,
+      "description": "Run and debug Java test cases in Visual Studio Code.",
+      "pushed_at": "2026-04-14T05:41:22Z"
+    },
+    {
+      "full_name": "apereo/java-cas-client",
+      "url": "https://github.com/apereo/java-cas-client",
+      "stars": 945,
+      "size_kb": 3160,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 2007,
+      "description": "Apereo Java CAS Client",
+      "pushed_at": "2026-04-14T05:26:11Z"
+    },
+    {
+      "full_name": "dromara/mica-mqtt",
+      "url": "https://github.com/dromara/mica-mqtt",
+      "stars": 463,
+      "size_kb": 3789,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 1966,
+      "description": "java mqtt 基于 java aio 实现，开源、简单、易用、低延迟、高性能百万级 java mqtt client 组件和 java mqtt broker 服务。降低自研 iot 物联网平台难度。🔝🔝 记得右上角点个star 关注更新！",
+      "pushed_at": "2026-04-14T05:39:46Z"
+    },
+    {
+      "full_name": "goldmansachs/reladomo",
+      "url": "https://github.com/goldmansachs/reladomo",
+      "stars": 383,
+      "size_kb": 10815,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 367,
+      "description": "Reladomo is an enterprise grade object-relational mapping framework for Java.",
+      "pushed_at": "2026-04-14T03:26:08Z"
+    },
+    {
+      "full_name": "aws/aws-advanced-jdbc-wrapper",
+      "url": "https://github.com/aws/aws-advanced-jdbc-wrapper",
+      "stars": 330,
+      "size_kb": 13744,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 1306,
+      "description": "The Amazon Web Services JDBC Driver has been redesigned as an advanced JDBC wrapper. This wrapper is complementary to and extends the functionality of an existing JDBC driver to help an application take advantage of the features of clustered databases such as Amazon Aurora.",
+      "pushed_at": "2026-04-14T02:45:51Z"
+    },
+    {
+      "full_name": "runelite/plugin-hub",
+      "url": "https://github.com/runelite/plugin-hub",
+      "stars": 343,
+      "size_kb": 11230,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 10490,
+      "description": "External plugins for RuneLite",
+      "pushed_at": "2026-04-14T01:55:36Z"
+    },
+    {
+      "full_name": "Yelp/nrtsearch",
+      "url": "https://github.com/Yelp/nrtsearch",
+      "stars": 309,
+      "size_kb": 10467,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 1049,
+      "description": "A high performance gRPC server on top of Apache Lucene",
+      "pushed_at": "2026-04-14T01:21:57Z"
+    },
+    {
+      "full_name": "jenkinsci/dingtalk-plugin",
+      "url": "https://github.com/jenkinsci/dingtalk-plugin",
+      "stars": 365,
+      "size_kb": 14050,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 399,
+      "description": "Dingtalk for jenkins",
+      "pushed_at": "2026-04-14T00:45:30Z"
+    },
+    {
+      "full_name": "rfresh2/ZenithProxy",
+      "url": "https://github.com/rfresh2/ZenithProxy",
+      "stars": 374,
+      "size_kb": 19647,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 4373,
+      "description": "2b2t minecraft proxy / bot",
+      "pushed_at": "2026-04-13T23:28:17Z"
+    },
+    {
+      "full_name": "Hakky54/ayza",
+      "url": "https://github.com/Hakky54/ayza",
+      "stars": 573,
+      "size_kb": 4743,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 1697,
+      "description": "🔐 An SSL library for configuring http client or server. Rich with features such as hot reloading ssl and trusting additional certificates during runtime, combining multiple keystores, loading pem files and os/jdk certificates, logging certificate information during ssl handshake, bypassing ssl configuration from other libraries and more",
+      "pushed_at": "2026-04-13T22:52:57Z"
+    },
+    {
+      "full_name": "AzureAD/microsoft-authentication-library-for-java",
+      "url": "https://github.com/AzureAD/microsoft-authentication-library-for-java",
+      "stars": 328,
+      "size_kb": 3497,
+      "java_files_estimated": -1,
+      "commit_count_estimated": 1157,
+      "description": "Microsoft Authentication Library (MSAL) for Java http://aka.ms/aadv2",
+      "pushed_at": "2026-04-13T22:43:46Z"
+    },
+    {
+      "full_name": "Team-EnderIO/EnderIO",
+      "url": "https://github.com/Team-EnderIO/EnderIO",
+      "stars": 393,
+      "size_kb": 19708,
+      "java_files_estimated": 628,
+      "commit_count_estimated": 2275,
+      "description": "Ender IO for Modern Minecraft.",
+      "pushed_at": "2026-04-13T23:21:23Z"
+    },
+    {
+      "full_name": "Trainguy9512/locomotion",
+      "url": "https://github.com/Trainguy9512/locomotion",
+      "stars": 754,
+      "size_kb": 3288,
+      "java_files_estimated": 136,
+      "commit_count_estimated": 588,
+      "description": null,
+      "pushed_at": "2026-04-13T22:28:39Z"
+    },
+    {
+      "full_name": "FasterXML/jackson-dataformat-xml",
+      "url": "https://github.com/FasterXML/jackson-dataformat-xml",
+      "stars": 622,
+      "size_kb": 5913,
+      "java_files_estimated": 210,
+      "commit_count_estimated": 2711,
+      "description": "Extension for Jackson JSON processor that adds support for serializing POJOs as XML (and deserializing from XML) as an alternative to JSON",
+      "pushed_at": "2026-04-13T22:07:54Z"
+    },
+    {
+      "full_name": "GTNewHorizons/Angelica",
+      "url": "https://github.com/GTNewHorizons/Angelica",
+      "stars": 377,
+      "size_kb": 7965,
+      "java_files_estimated": 872,
+      "commit_count_estimated": 763,
+      "description": "OptiFine replacement for 1.7.10",
+      "pushed_at": "2026-04-14T02:00:23Z"
+    },
+    {
+      "full_name": "Sunagatov/Iced-Latte",
+      "url": "https://github.com/Sunagatov/Iced-Latte",
+      "stars": 631,
+      "size_kb": 13156,
+      "java_files_estimated": 360,
+      "commit_count_estimated": 2043,
+      "description": "a online Marketplace for coffee retail (Backend)",
+      "pushed_at": "2026-04-13T21:22:24Z"
+    }
+  ],
+  "filtered": [
+    {
+      "full_name": "undera/jmeter-plugins",
+      "url": "https://github.com/undera/jmeter-plugins",
+      "stars": 581,
+      "size_kb": 23688,
+      "java_files_estimated": 464,
+      "commit_count_estimated": 3635,
+      "description": "A Marketplace for JMeter Plugins",
+      "pushed_at": "2026-04-14T07:21:24Z"
+    },
+    {
+      "full_name": "86dbs/dbsyncer",
+      "url": "https://github.com/86dbs/dbsyncer",
+      "stars": 882,
+      "size_kb": 11583,
+      "java_files_estimated": 648,
+      "commit_count_estimated": 3156,
+      "description": "DBSyncer（简称dbs）是一款开源的数据同步中间件，提供MySQL、Oracle、SqlServer、PostgreSQL、Elasticsearch(ES)、Kafka、File、SQL等同步场景。支持上传插件自定义同步转换业务，提供监控全量和增量数据统计图、应用性能预警等。",
+      "pushed_at": "2026-04-14T07:04:11Z"
+    },
+    {
+      "full_name": "spring-projects/spring-kafka",
+      "url": "https://github.com/spring-projects/spring-kafka",
+      "stars": 2459,
+      "size_kb": 16605,
+      "java_files_estimated": 572,
+      "commit_count_estimated": 3027,
+      "description": "Provides Familiar Spring Abstractions for Apache Kafka",
+      "pushed_at": "2026-04-14T01:17:30Z"
+    },
+    {
+      "full_name": "microsoft/mssql-jdbc",
+      "url": "https://github.com/microsoft/mssql-jdbc",
+      "stars": 1127,
+      "size_kb": 21083,
+      "java_files_estimated": 450,
+      "commit_count_estimated": 2884,
+      "description": "The Microsoft JDBC Driver for SQL Server is a Type 4 JDBC driver that provides database connectivity with SQL Server through the standard JDBC application program interfaces (APIs).",
+      "pushed_at": "2026-04-14T06:38:33Z"
+    },
+    {
+      "full_name": "sqlancer/sqlancer",
+      "url": "https://github.com/sqlancer/sqlancer",
+      "stars": 1721,
+      "size_kb": 6308,
+      "java_files_estimated": 744,
+      "commit_count_estimated": 2611,
+      "description": "Automated testing to find logic and performance bugs in database systems",
+      "pushed_at": "2026-04-14T01:22:50Z"
+    },
+    {
+      "full_name": "Team-EnderIO/EnderIO",
+      "url": "https://github.com/Team-EnderIO/EnderIO",
+      "stars": 393,
+      "size_kb": 19708,
+      "java_files_estimated": 628,
+      "commit_count_estimated": 2275,
+      "description": "Ender IO for Modern Minecraft.",
+      "pushed_at": "2026-04-13T23:21:23Z"
+    },
+    {
+      "full_name": "terrakube-io/terrakube",
+      "url": "https://github.com/terrakube-io/terrakube",
+      "stars": 877,
+      "size_kb": 10773,
+      "java_files_estimated": 506,
+      "commit_count_estimated": 2072,
+      "description": "Open source IaC Automation and Collaboration Software.",
+      "pushed_at": "2026-04-14T01:47:13Z"
+    },
+    {
+      "full_name": "Sunagatov/Iced-Latte",
+      "url": "https://github.com/Sunagatov/Iced-Latte",
+      "stars": 631,
+      "size_kb": 13156,
+      "java_files_estimated": 360,
+      "commit_count_estimated": 2043,
+      "description": "a online Marketplace for coffee retail (Backend)",
+      "pushed_at": "2026-04-13T21:22:24Z"
+    },
+    {
+      "full_name": "pinterest/teletraan",
+      "url": "https://github.com/pinterest/teletraan",
+      "stars": 1829,
+      "size_kb": 20554,
+      "java_files_estimated": 342,
+      "commit_count_estimated": 1868,
+      "description": "Teletraan is Pinterest's deploy system.",
+      "pushed_at": "2026-04-13T22:30:08Z"
+    },
+    {
+      "full_name": "eclipse-openvsx/openvsx",
+      "url": "https://github.com/eclipse-openvsx/openvsx",
+      "stars": 1901,
+      "size_kb": 22661,
+      "java_files_estimated": 542,
+      "commit_count_estimated": 1812,
+      "description": "An open-source registry for VS Code extensions",
+      "pushed_at": "2026-04-14T07:04:03Z"
+    },
+    {
+      "full_name": "Pi4J/pi4j",
+      "url": "https://github.com/Pi4J/pi4j",
+      "stars": 355,
+      "size_kb": 19661,
+      "java_files_estimated": 516,
+      "commit_count_estimated": 1384,
+      "description": "Pi4J, the Java library to control the GPIOs of the Raspberry Pi",
+      "pushed_at": "2026-04-14T07:34:57Z"
+    },
+    {
+      "full_name": "agents-flex/agents-flex",
+      "url": "https://github.com/agents-flex/agents-flex",
+      "stars": 1124,
+      "size_kb": 9984,
+      "java_files_estimated": 330,
+      "commit_count_estimated": 1257,
+      "description": "Agents-flex is A Lightweight Java AI Application Development Framework.",
+      "pushed_at": "2026-04-14T01:46:05Z"
+    },
+    {
+      "full_name": "google/adk-java",
+      "url": "https://github.com/google/adk-java",
+      "stars": 1466,
+      "size_kb": 15121,
+      "java_files_estimated": 474,
+      "commit_count_estimated": 989,
+      "description": "An open-source, code-first Java toolkit for building, evaluating, and deploying sophisticated AI agents with flexibility and control.",
+      "pushed_at": "2026-04-13T23:10:57Z"
+    },
+    {
+      "full_name": "GTNewHorizons/Angelica",
+      "url": "https://github.com/GTNewHorizons/Angelica",
+      "stars": 377,
+      "size_kb": 7965,
+      "java_files_estimated": 872,
+      "commit_count_estimated": 763,
+      "description": "OptiFine replacement for 1.7.10",
+      "pushed_at": "2026-04-14T02:00:23Z"
+    },
+    {
+      "full_name": "iflytek/skillhub",
+      "url": "https://github.com/iflytek/skillhub",
+      "stars": 2482,
+      "size_kb": 11224,
+      "java_files_estimated": 600,
+      "commit_count_estimated": 685,
+      "description": "Self-hosted, open-source agent skill registry for enterprises. Publish & version skill packages, govern with RBAC and audit logs, deploy   on-premise with Docker or Kubernetes.",
+      "pushed_at": "2026-04-14T07:30:04Z"
+    },
+    {
+      "full_name": "agentscope-ai/agentscope-java",
+      "url": "https://github.com/agentscope-ai/agentscope-java",
+      "stars": 2576,
+      "size_kb": 29321,
+      "java_files_estimated": 836,
+      "commit_count_estimated": 626,
+      "description": "AgentScope Java: Agent-Oriented Programming for Building LLM Applications",
+      "pushed_at": "2026-04-14T06:26:37Z"
+    }
+  ]
+}

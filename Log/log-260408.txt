@@ -15,12 +15,34 @@
 [1]オープンソースソフトウェアをクローン
      -> Javaプロジェクトをいくつか選定
 
-[2]メタデータ (クラス名・パス・パッケージ・引用ライブラリ名・それぞれのトークン)を抽出し、JSON形式で
+[2]メタデータ (クラス名・パス・パッケージ・引用ライブラリ名・それぞれのトークン)を抽出し、JSON形式で保存する
+    01-extract-metadata/extract_java_metadata.py
 
-[3]ペア生成　
-     -> [2]の組み合わせを作成（すべて作るとメタデータの二乗になるのでデータが膨大に）
-     -> https://kentei.ai/blog/archives/1849 データセットは二値分類だと~10万が理想
+[3]ペア生成　 (02-generate-pairs/generate_class_pairs_mini.py)
+     -> [2]の組み合わせを作成し、構造的類似度を計算　（現状：package_similarity, class_similarity）
+     ->上限はMAX_PAIRS = 2000で打ち切り
 
-[4]
+[4]JSON -> CSV 変換  (03-compute-features/csv_transfer.py)
+    後続処理のため
 
-## 次回やること
+[5]gitログ取得 (01-extract_metadata/extract_commit_log_json.py)
+    各OSSリポジトリのgit logを解析し、コミットごとの変更ファイルをJSON形式で保存
+
+[6]ラベル付与 (04-labeling/build_cochange_dataset.py)
+    [3]で作ったペアと[5]のコミット履歴を照合し、共変更の有無を確認
+
+[7]特徴量付与　(04-labeling/put_feature.py)
+    [6]のラベル付きデータセットと[2]のメタデータを結合し、特徴量を付与
+    現在の特徴量：
+    ・package_similarity       ...  パッケージ名の類似度
+    ・class_name_similarity    ...　クラス名の類似度
+    ・import_similarity        ...　引用ライブラリの一致度
+    ・method_similarity        ...  メソッドの類似度
+
+[8]モデル学習 (05-train-model/train-model-w13.py)
+    Random Forestで分類モデルを学習・評価 -> F1スコアと特徴量重要度を見る
+
+[現在の課題]
+・[3]ペアの打ち切り
+・[6]正負のバランスがプロジェクトによってバラバラ
+・[8]単純にスコアが低い

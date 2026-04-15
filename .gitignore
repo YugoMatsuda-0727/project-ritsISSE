@@ -12,3 +12,7 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Secrets
+Log/Token-0411.txt
+research-scripts/search_oss_candidates.py
