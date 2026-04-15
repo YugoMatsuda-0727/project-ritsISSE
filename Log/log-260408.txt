@@ -31,15 +31,7 @@
 [6]ラベル付与 (04-labeling/build_cochange_dataset.py)
     [3]で作ったペアと[5]のコミット履歴を照合し、共変更の有無を確認
 
-[7]特徴量付与　(04-labeling/put_feature.py)
-    [6]のラベル付きデータセットと[2]のメタデータを結合し、特徴量を付与
-    現在の特徴量：
-    ・package_similarity       ...  パッケージ名の類似度
-    ・class_name_similarity    ...　クラス名の類似度
-    ・import_similarity        ...　引用ライブラリの一致度
-    ・method_similarity        ...  メソッドの類似度
-
-[8]モデル学習 (05-train-model/train-model-w13.py)
+[7]モデル学習 (05-train-model/train-model-w13.py)
     Random Forestで分類モデルを学習・評価 -> F1スコアと特徴量重要度を見る
 
 [現在の課題]
