@@ -5,7 +5,7 @@ from pathlib import Path
 
 # ===== パス設定 =====
 BASE_DIR = Path(__file__).resolve().parents[1]
-DATASET_DIR = BASE_DIR / "outputs" / "dataset_pairs"
+DATASET_DIR = BASE_DIR / "outputs" / "dataset"
 METADATA_DIR = BASE_DIR / "outputs" / "metadata"
 OUTPUT_DIR = BASE_DIR / "outputs" / "datasets_with_features"
 
