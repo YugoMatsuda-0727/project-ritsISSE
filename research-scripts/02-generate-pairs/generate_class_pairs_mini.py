@@ -8,7 +8,7 @@ METADATA_DIR = BASE_DIR / "research-scripts" / "outputs" / "metadata"       # .j
 OUTPUT_DIR = BASE_DIR / "research-scripts" / "outputs" / "pairs"            # 出力先
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-MAX_PAIRS=2000
+# MAX_PAIRS=30000
 
 def load_metadata(json_path):                      # .json -> データ構造に変換して返す
     """
@@ -61,7 +61,7 @@ def compute_pair_features(a, b):
 
 def process_project(json_path):                                      
     classes = load_metadata(json_path)
-    pairs = generate_class_pairs(classes)[:MAX_PAIRS]
+    pairs = generate_class_pairs(classes) # [:MAX_PAIRS]
     results = []
     for a, b in pairs:
         features = compute_pair_features(a, b)
