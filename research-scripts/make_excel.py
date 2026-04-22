@@ -1,15 +1,12 @@
 import json
 import csv
 from pathlib import Path
-from openpyxl import Workbook
-from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
-from openpyxl.chart import ScatterChart, Reference, Series
-from openpyxl.chart.series import SeriesLabel
+import xlsxwriter
 
 BASE_DIR = Path(__file__).parent
 METADATA_DIR = BASE_DIR / "outputs" / "metadata"
 DATASET_DIR = BASE_DIR / "outputs" / "dataset"
-OUTPUT_PATH = BASE_DIR / "outputs" / "distribution_analysis.xlsx"
+OUTPUT_PATH = str(BASE_DIR / "outputs" / "distribution_analysis.xlsx")
 
 SKIP = {".git", "dummy_sample", "Log", "research-scripts"}
 
@@ -52,76 +49,92 @@ def collect_data():
     return rows
 
 def build_excel(rows):
-    wb = Workbook()
-    ws = wb.active
-    ws.title = "Distribution"
+    wb = xlsxwriter.Workbook(OUTPUT_PATH)
+    ws = wb.add_worksheet("Distribution")
 
-    header_fill = PatternFill("solid", start_color="2F4F8F")
-    header_font = Font(bold=True, color="FFFFFF", name="Arial", size=11)
-    center = Alignment(horizontal="center", vertical="center")
-    thin = Side(style="thin", color="AAAAAA")
-    border = Border(left=thin, right=thin, top=thin, bottom=thin)
+    header_fmt = wb.add_format({
+        "bold": True, "font_color": "white", "bg_color": "2F4F8F",
+        "align": "center", "valign": "vcenter", "border": 1,
+        "font_name": "Arial", "font_size": 11
+    })
+    even_fmt = wb.add_format({
+        "bg_color": "EEF2FF", "align": "center", "valign": "vcenter",
+        "border": 1, "font_name": "Arial", "font_size": 10
+    })
+    odd_fmt = wb.add_format({
+        "align": "center", "valign": "vcenter",
+        "border": 1, "font_name": "Arial", "font_size": 10
+    })
+    corr_label_fmt = wb.add_format({"bold": True, "font_name": "Arial"})
+    corr_val_fmt = wb.add_format({
+        "font_color": "0000FF", "font_name": "Arial", "num_format": "0.0000"
+    })
 
-    headers = ["Project", "Class数", "ペア合計", "Positive Pairs", "共変更率 (%)"]
-    col_widths = [50, 15, 15, 15, 20]
+    headers = ["Project", "Class Count", "Total Pairs", "Positive Pairs", "Co-change Rate (%)"]
+    col_widths = [40, 15, 15, 15, 20]
+    for col, (h, w) in enumerate(zip(headers, col_widths)):
+        ws.write(0, col, h, header_fmt)
+        ws.set_column(col, col, w)
+    ws.set_row(0, 22)
 
-    for col, (h, w) in enumerate(zip(headers, col_widths), 1):
-        cell = ws.cell(row=1, column=col, value=h)
-        cell.font = header_font
-        cell.fill = header_fill
-        cell.alignment = center
-        cell.border = border
-        ws.column_dimensions[cell.column_letter].width = w
+    for i, row in enumerate(rows):
+        fmt = even_fmt if i % 2 == 0 else odd_fmt
+        ws.write(i + 1, 0, row["project"], fmt)
+        ws.write(i + 1, 1, row["class_count"], fmt)
+        ws.write(i + 1, 2, row["total_pairs"], fmt)
+        ws.write(i + 1, 3, row["positive_pairs"], fmt)
+        ws.write(i + 1, 4, row["cochange_ratio"], fmt)
 
-    ws.row_dimensions[1].height = 22
-
-    alt_fill = PatternFill("solid", start_color="EEF2FF")
-    for i, row in enumerate(rows, 2):
-        values = [
-            row["project"],
-            row["class_count"],
-            row["total_pairs"],
-            row["positive_pairs"],
-            row["cochange_ratio"],
-        ]
-        fill = alt_fill if i % 2 == 0 else None
-        for col, val in enumerate(values, 1):
-            cell = ws.cell(row=i, column=col, value=val)
-            cell.font = Font(name="Arial", size=10)
-            cell.alignment = center
-            cell.border = border
-            if fill:
-                cell.fill = fill
-
-    # 相関係数をExcel数式で計算
     last_row = len(rows) + 1
-    ws.cell(row=last_row + 2, column=1, value="相関係数（クラス数 vs 共変更率）").font = Font(bold=True, name="Arial")
-    corr_cell = ws.cell(row=last_row + 2, column=2)
-    corr_cell.value = f"=CORREL(B2:B{last_row},E2:E{last_row})"
-    corr_cell.font = Font(name="Arial", color="0000FF")
-    corr_cell.number_format = "0.0000"
+    ws.write(last_row + 1, 0, "相関係数（クラス数 vs 共変更率）", corr_label_fmt)
+    ws.write_formula(last_row + 1, 1,
+                     f"=CORREL(B2:B{last_row},E2:E{last_row})", corr_val_fmt)
 
-    # 散布図
-    chart = ScatterChart()
-    chart.title = "Class Count vs Co-change Rate"
-    chart.style = 10
-    chart.x_axis.title = "Class Count"
-    chart.y_axis.title = "Co-change Rate (%)"
-    chart.legend = None
+    chart = wb.add_chart({"type": "scatter"})
 
-    x_vals = Reference(ws, min_col=2, min_row=2, max_row=last_row)
-    y_vals = Reference(ws, min_col=5, min_row=2, max_row=last_row)
-    series = Series(y_vals, x_vals, title="Projects")
-    series.marker.symbol = "circle"
-    series.marker.size = 8
-    series.graphicalProperties.line.noFill = True
-    chart.series.append(series)
-    chart.width = 18
-    chart.height = 12
+    chart.add_series({
+        "name": "Projects",
+        "categories": ["Distribution", 1, 1, len(rows), 1],
+        "values":     ["Distribution", 1, 4, len(rows), 4],
+        "marker": {
+            "type": "circle",
+            "size": 8,
+            "fill": {"color": "#4472C4"},
+            "border": {"color": "#4472C4"},
+        },
+        "line": {"none": True},
+        "data_labels": {
+            "value": True,
+            "num_format": "0.00",
+        },
+    })
 
-    ws.add_chart(chart, "G2")
+    chart.set_title({"name": "Class Count vs Co-change Rate"})
 
-    wb.save(OUTPUT_PATH)
+    chart.set_x_axis({
+        "name": "Class Count",
+        "min": 0,
+        "max": 1200,
+        "major_unit": 200,
+        "num_format": "0",
+        "major_gridlines": {"visible": True},
+    })
+
+    chart.set_y_axis({
+        "name": "Co-change Rate (%)",
+        "min": 0,
+        "max": 100,
+        "major_unit": 10,
+        "num_format": "0",
+        "major_gridlines": {"visible": True},
+    })
+
+    chart.set_legend({"none": True})
+    chart.set_size({"width": 600, "height": 400})
+
+    ws.insert_chart("G2", chart)
+
+    wb.close()
     print(f"\n[DONE] {OUTPUT_PATH}")
 
 if __name__ == "__main__":
