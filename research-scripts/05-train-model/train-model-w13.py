@@ -40,7 +40,7 @@ if __name__ == "__main__":
             ]
         ]
 
-        y = df["label"]
+        y = df["co_changed"]
 
         # ===== train / test 分割 =====
         X_train, X_test, y_train, y_test = train_test_split(

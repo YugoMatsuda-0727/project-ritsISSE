@@ -1,7 +1,9 @@
 # put_feature.py
 
 import json
+import csv
 from pathlib import Path
+
 
 # ===== パス設定 =====
 BASE_DIR = Path(__file__).resolve().parents[1]
@@ -28,8 +30,8 @@ def jaccard(a, b):
 # ===== test 除外 =====
 def is_valid_pair(pair):
     return (
-        "src/test" not in pair["file1"]
-        and "src/test" not in pair["file2"]
+        "src/test" not in pair["file_a"]
+        and "src/test" not in pair["file_b"]
     )
 
 
@@ -44,8 +46,8 @@ def enrich_pairs(dataset, meta_index):
             skipped += 1
             continue
 
-        f1 = pair["file1"]
-        f2 = pair["file2"]
+        f1 = pair["file_a"]
+        f2 = pair["file_b"]
 
         if f1 not in meta_index or f2 not in meta_index:
             skipped += 1
@@ -84,8 +86,8 @@ def enrich_pairs(dataset, meta_index):
 # ===== main =====
 if __name__ == "__main__":
 
-    for dataset_file in DATASET_DIR.glob("*_dataset.json"):
-        project = dataset_file.stem.replace("_pairs_mini_dataset", "")
+    for dataset_file in DATASET_DIR.glob("*_dataset.csv"):
+        project = dataset_file.stem.replace("_dataset", "")
         print(f"[PROCESS] {project}")
 
         metadata_file = METADATA_DIR / f"{project}.json"
@@ -94,7 +96,8 @@ if __name__ == "__main__":
             continue
 
         with open(dataset_file, encoding="utf-8") as f:
-            dataset = json.load(f)
+            reader = csv.DictReader(f)
+            dataset = list(reader)
 
         with open(metadata_file, encoding="utf-8") as f:
             metadata = json.load(f)
