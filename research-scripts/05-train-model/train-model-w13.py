@@ -36,7 +36,13 @@ if __name__ == "__main__":
         X = df[
             [
                 "package_similarity",
-                "class_name_similarity"
+                "class_name_similarity",
+                "import_similarity",
+                "method_similarity",
+                "field_similarity",
+                "interface_similarity",
+                "param_type_similarity",
+                "superclass_match",
             ]
         ]
 
