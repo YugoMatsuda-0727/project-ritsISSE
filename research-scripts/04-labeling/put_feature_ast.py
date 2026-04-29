@@ -37,6 +37,14 @@ def superclass_match(m1, m2) -> float:
         return 1.0
     return 0.0
 
+# ===== クラス名の末尾一致 =====
+def class_name_suffix_match(m1, m2) -> float:
+    t1 = m1.get("class_name_tokens", [])
+    t2 = m2.get("class_name_tokens", [])
+    if not t1 or not t2:
+        return 0.0
+    return 1.0 if t1[-1] == t2[-1] else 0.0
+
 
 # ===== test 除外 =====
 def is_valid_pair(pair):
@@ -101,6 +109,7 @@ def enrich_pairs(dataset, meta_index):
                 m2.get("param_types", [])
             ),
             "superclass_match": superclass_match(m1, m2),
+            "class_name_suffix_match": class_name_suffix_match(m1, m2),
         })
 
     return enriched, skipped
