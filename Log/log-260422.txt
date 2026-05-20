@@ -2,8 +2,40 @@
 
 ## 今日やること
 
+    ・エクセルで分布図の出力
+    ・ASTベースの特徴量を追加
 
 ## 作業内容
 
+    １．エクセル
+        ・openpyxlを使用
+
+    ２．AST特徴量
+        ・extract_metadata.pyを改造
+
+
+<ASTとは（おさらい）>
+プログラムをツリー構造で表したもの
+
+（例）
+public class OrderService extends BaseService implements Runnable {
+    private String name;
+    public void execute(String input) {}
+}
+
+ClassDeclaration
+  ├── name: "OrderService"
+  ├── extends: "BaseService"       ← superclass
+  ├── implements: ["Runnable"]     ← interfaces
+  ├── FieldDeclaration
+  │     └── declarator: "name"     ← fields
+  └── MethodDeclaration
+        └── parameter: "String"    ← param_types
+
+
+    Jaccard(A, B) = |A ∩ B| / |A ∪ B|
+              = 共通要素の数 / 全要素の数
+
+              
 
 ## 次回やること

@@ -45,6 +45,63 @@ def class_name_suffix_match(m1, m2) -> float:
         return 0.0
     return 1.0 if t1[-1] == t2[-1] else 0.0
 
+# ===== w6-仮説1 直接import依存 =====
+def direct_import(m1, m2) -> float:
+    imports1 = set(m1.get("imports", []))
+    imports2 = set(m2.get("imports", []))
+    class1 = m1.get("class_name", "")
+    class2 = m2.get("class_name", "")
+
+    # importのフルパス末尾がクラス名と一致するかで判定
+    def imported(imports, class_name):
+        return any(imp.split(".")[-1] == class_name for imp in imports)
+
+    if imported(imports1, class2) or imported(imports2, class1):
+        return 1.0
+    return 0.0
+
+
+# ===== w6-仮説2 引数型依存 =====
+def param_type_dependency(m1, m2) -> float:
+    params1 = set(m1.get("param_types", []))
+    params2 = set(m2.get("param_types", []))
+    class1 = m1.get("class_name", "")
+    class2 = m2.get("class_name", "")
+
+    if class2 in params1 or class1 in params2:
+        return 1.0
+    return 0.0
+
+
+# ===== w6-仮説3 継承依存（直接の親子関係） =====
+def inheritance_dependency(m1, m2) -> float:
+    super1 = m1.get("superclass")
+    super2 = m2.get("superclass")
+    class1 = m1.get("class_name", "")
+    class2 = m2.get("class_name", "")
+
+    if super1 == class2 or super2 == class1:
+        return 1.0
+    return 0.0
+
+
+# ===== w6-仮説4 クラスロールペア =====
+ROLE_PAIRS = [
+    ("controller", "service"),
+    ("service", "repository"),
+    ("service", "dao"),
+]
+
+def class_role_pair(m1, m2) -> float:
+    role1 = m1.get("class_role", {})
+    role2 = m2.get("class_role", {})
+
+    for r_a, r_b in ROLE_PAIRS:
+        if (role1.get(r_a) and role2.get(r_b)) or \
+           (role1.get(r_b) and role2.get(r_a)):
+            return 1.0
+    return 0.0
+
 
 # ===== test 除外 =====
 def is_valid_pair(pair):
