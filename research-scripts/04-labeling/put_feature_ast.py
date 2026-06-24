@@ -47,31 +47,48 @@ def class_name_suffix_match(m1, m2) -> float:
 
 # ===== w6-仮説1 直接import依存 =====
 def direct_import(m1, m2) -> float:
+
     imports1 = set(m1.get("imports", []))
     imports2 = set(m2.get("imports", []))
-    class1 = m1.get("class_name", "")
-    class2 = m2.get("class_name", "")
 
-    # importのフルパス末尾がクラス名と一致するかで判定
-    def imported(imports, class_name):
-        return any(imp.split(".")[-1] == class_name for imp in imports)
+    fqcn1 = f'{m1.get("package", "")}.{m1.get("class_name", "")}'
+    fqcn2 = f'{m2.get("package", "")}.{m2.get("class_name", "")}'
 
-    if imported(imports1, class2) or imported(imports2, class1):
+    # m1 が m2 を import
+    if fqcn2 in imports1:
         return 1.0
+
+    # m2 が m1 を import
+    if fqcn1 in imports2:
+        return 1.0
+
     return 0.0
 
 
 # ===== w6-仮説2 引数型依存 =====
-def param_type_dependency(m1, m2) -> float:
-    params1 = set(m1.get("param_types", []))
-    params2 = set(m2.get("param_types", []))
+def uses_dependency(m1, m2) -> float:
+   
     class1 = m1.get("class_name", "")
     class2 = m2.get("class_name", "")
 
+    params1     = set(m1.get("param_types", []))
+    params2     = set(m2.get("param_types", []))
+    inst1       = set(m1.get("instantiated_classes", []))
+    inst2       = set(m2.get("instantiated_classes", []))
+    field_types1 = set(m1.get("field_types", []))
+    field_types2 = set(m2.get("field_types", []))
+
+    # AがBの型を引数に取る、またはその逆
     if class2 in params1 or class1 in params2:
         return 1.0
-    return 0.0
+    # AがBをnewしている、またはその逆
+    if class2 in inst1 or class1 in inst2:
+        return 1.0
+    # AのフィールドにBの型が使われている、またはその逆
+    if class2 in field_types1 or class1 in field_types2:
+        return 1.0
 
+    return 0.0
 
 # ===== w6-仮説3 継承依存（直接の親子関係） =====
 def inheritance_dependency(m1, m2) -> float:
@@ -84,24 +101,26 @@ def inheritance_dependency(m1, m2) -> float:
         return 1.0
     return 0.0
 
+# ==== w10 呼び出し依存 =====
+def method_call_dependency(m1, m2) -> float:
+    """
+    AがBの型を経由してメソッドを呼んでいる、またはその逆なら1.0
+    （viatypeがクラス名と一致する場合のみ正しい依存とみなす）
+    """
+    class1 = m1.get("class_name", "")
+    class2 = m2.get("class_name", "")
 
-# ===== w6-仮説4 クラスロールペア =====
-ROLE_PAIRS = [
-    ("controller", "service"),
-    ("service", "repository"),
-    ("service", "dao"),
-]
+    called1 = m1.get("called_methods", [])
+    called2 = m2.get("called_methods", [])
 
-def class_role_pair(m1, m2) -> float:
-    role1 = m1.get("class_role", {})
-    role2 = m2.get("class_role", {})
+    # Aの呼び出しのいずれかがBの型を経由しているか
+    if any(c.get("viatype") == class2 for c in called1):
+        return 1.0
+    # Bの呼び出しのいずれかがAの型を経由しているか
+    if any(c.get("viatype") == class1 for c in called2):
+        return 1.0
 
-    for r_a, r_b in ROLE_PAIRS:
-        if (role1.get(r_a) and role2.get(r_b)) or \
-           (role1.get(r_b) and role2.get(r_a)):
-            return 1.0
     return 0.0
-
 
 # ===== test 除外 =====
 def is_valid_pair(pair):
@@ -167,6 +186,10 @@ def enrich_pairs(dataset, meta_index):
             ),
             "superclass_match": superclass_match(m1, m2),
             "class_name_suffix_match": class_name_suffix_match(m1, m2),
+            "direct_import": direct_import(m1, m2),
+            "uses_dependency": uses_dependency(m1, m2),
+            "inheritance_dependency": inheritance_dependency(m1, m2),
+            "method_call_dependency": method_call_dependency(m1, m2),
         })
 
     return enriched, skipped
