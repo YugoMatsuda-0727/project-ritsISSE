@@ -30,7 +30,7 @@ BINARY_FEATURES = [
 
 ALL_FEATURES = JACCARD_FEATURES + BINARY_FEATURES
 
-THRESHOLD = 0.25  # positive_rate の閾値
+THRESHOLD = 0.0  # positive_rate の閾値
 
 
 # ===== データ読み込み =====

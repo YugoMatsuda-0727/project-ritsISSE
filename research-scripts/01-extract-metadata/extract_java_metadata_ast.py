@@ -30,6 +30,11 @@ def parse_ast_features(content: str) -> dict:
         "instantiated_classes": [], # インスタンス化されているクラス
         "field_types": [],  # フィールドの型
         "called_methods": [],  # [{"method": "...", "viatype": "..."}, ...] 呼び出されているメソッドと呼び出し方法（直接呼び出し、インスタンス経由、static経由など）
+        "class_annotations": [],      # クラス直上のアノテーション
+        "method_annotations": [],     # メソッド直上のアノテーション
+        "field_annotations": [],      # フィールド直上のアノテーション
+        "param_annotations": [],      # 引数直上のアノテーション
+        "all_annotations": [],        # ファイル内の全アノテーションのユニークリスト
     }
 
     if not AST_AVAILABLE:
@@ -48,28 +53,85 @@ def parse_ast_features(content: str) -> dict:
     param_types = []
     instantiated_classes = []
     called_methods = []
+    class_annotations = []
+    method_annotations = []
+    field_annotations = []
+    param_annotations = []
+    all_annotations_set = set()
 
     for _, node in tree:
-        # フィールド変数名
-        if isinstance(node, javalang.tree.FieldDeclaration):
-            for declarator in node.declarators:
-                fields.append(declarator.name)
-                field_types.append(node.type.name)  # フィールドの型も追加
-
-        # クラス宣言から継承・実装情報を取得
+        # 1. クラス定義、またはインターフェース定義（及びその直上のアノテーション）
         if isinstance(node, javalang.tree.ClassDeclaration):
+            # クラスの場合
             if node.extends:
                 superclass = node.extends.name
             if node.implements:
                 interfaces = [i.name for i in node.implements]
+            
+            # クラス直上のアノテーション
+            if node.annotations:
+                for anno in node.annotations:
+                    class_annotations.append(anno.name)
+                    all_annotations_set.add(anno.name)
 
-        # メソッド引数の型
-        if isinstance(node, javalang.tree.MethodDeclaration):
+        elif isinstance(node, javalang.tree.InterfaceDeclaration):
+            # インターフェースの場合（extendsで他のインターフェースを複数継承できる）
+            if node.extends:
+                # node.extends は通常 list (ReferenceTypeのリスト) になります
+                if isinstance(node.extends, list):
+                    interfaces.extend([ext.name for ext in node.extends])
+                else:
+                    interfaces.append(node.extends.name)
+            
+            # インターフェース直上のアノテーション
+            if node.annotations:
+                for anno in node.annotations:
+                    class_annotations.append(anno.name)
+                    all_annotations_set.add(anno.name)
+
+        # 2. フィールド変数名（及びその直上のアノテーション）
+        elif isinstance(node, javalang.tree.FieldDeclaration):
+            for declarator in node.declarators:
+                fields.append(declarator.name)
+                field_types.append(node.type.name)
+            
+            # フィールド直上のアノテーションを抽出
+            if node.annotations:
+                for anno in node.annotations:
+                    field_annotations.append(anno.name)
+                    all_annotations_set.add(anno.name)
+
+        # 3. メソッド定義（及びその直上のアノテーション、引数アノテーション）
+        elif isinstance(node, javalang.tree.MethodDeclaration):
             for param in node.parameters:
                 param_types.append(param.type.name)
+                # 引数直上のアノテーションを抽出 (例: @RequestParam, @PathVariable)
+                if param.annotations:
+                    for anno in param.annotations:
+                        param_annotations.append(anno.name)
+                        all_annotations_set.add(anno.name)
+            
+            # メソッド直上のアノテーションを抽出
+            if node.annotations:
+                for anno in node.annotations:
+                    method_annotations.append(anno.name)
+                    all_annotations_set.add(anno.name)
 
-        # インスタンス化されているクラス
-        if isinstance(node, javalang.tree.ClassCreator):
+        # 4. コンストラクタ定義（引数アノテーション等のため）
+        elif isinstance(node, javalang.tree.ConstructorDeclaration):
+            for param in node.parameters:
+                param_types.append(param.type.name)
+                if param.annotations:
+                    for anno in param.annotations:
+                        param_annotations.append(anno.name)
+                        all_annotations_set.add(anno.name)
+            if node.annotations:
+                for anno in node.annotations:
+                    method_annotations.append(anno.name)
+                    all_annotations_set.add(anno.name)
+
+        # 5. インスタンス化されているクラス
+        elif isinstance(node, javalang.tree.ClassCreator):
             instantiated_classes.append(node.type.name)
     
     # フィールドの「変数名：型名」の対応を作る
@@ -114,6 +176,11 @@ def parse_ast_features(content: str) -> dict:
         "field_types": field_types,
         "field_type_map": field_type_map,
         "called_methods": called_methods,
+        "class_annotations": class_annotations,
+        "method_annotations": method_annotations,
+        "field_annotations": field_annotations,
+        "param_annotations": param_annotations,
+        "all_annotations": list(set(class_annotations + method_annotations + field_annotations + param_annotations))
     }
 
 
@@ -180,6 +247,16 @@ def parse_java_file(file_path: Path, project_root: Path):
         "instantiated_classes": ast_features["instantiated_classes"],
         "field_types": ast_features["field_types"],
         "called_methods": ast_features["called_methods"],
+        "class_annotations": ast_features["class_annotations"],
+        "method_annotations": ast_features["method_annotations"],
+        "field_annotations": ast_features["field_annotations"],
+        "param_annotations": ast_features["param_annotations"],
+        "all_annotations": list(set(
+            ast_features["class_annotations"] +
+            ast_features["method_annotations"] +
+            ast_features["field_annotations"] +
+            ast_features["param_annotations"]
+        ))
     }
 
 
